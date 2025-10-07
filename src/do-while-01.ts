@@ -13,14 +13,13 @@ async function main() {
     let vez = 1; // variavel de controle
     let senhaUsuario = ""
     do {
-        if (vez > 3) {
-            console.log("Número máximo de tentativas foi atingido. Tente novamente.")
-            break;
-        }
         senhaUsuario = await scanner.question("Informe a senha: ");
         vez = vez + 1;
-    } while (senha !== senhaUsuario)
+    } while (senha !== senhaUsuario && vez <= 3)
 
+    if (vez > 3) {
+        console.log("Número máximo de tentativas foi atingido. Tente novamente.")
+    }
     // SAÍDA
     scanner.close();
 }
