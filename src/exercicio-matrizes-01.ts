@@ -19,8 +19,8 @@ async function main() {
       "469999887766",
       35,
     ],
-    ["Pricila", "pricila@email.com", "469999887766", 22],
-    ["Gustavo", "gustavo@email.com", "469999887766", 15],
+    ["Pricila De Tal", "pricila@email.com", "469999887766", 22],
+    ["Gustavo De Tal", "gustavo@email.com", "469999887766", 15],
   ];
 
   let menu = "\n\n#### Opções do Programa ####";
@@ -29,7 +29,7 @@ async function main() {
   menu += "\n3- Listar todos os contatos";
   menu += "\n9- Sair";
   let opcaoMenu = 0;
-  
+
   do {
     console.log(menu);
     opcaoMenu = await scanner.questionInt("Informe a opção desejada: ");
@@ -52,11 +52,26 @@ async function main() {
       }
       case 2: {
         //busca
-
+        const primeiroNome = await scanner.question(
+          "Informe o primeiro nome: "
+        );
+        let encontrado = false;
+        for (const [nome, email, telefone, idade] of contatos) {
+          const primeiroNomeContato = nome?.toString().toUpperCase().split(" ")[0]
+          if (primeiroNomeContato === primeiroNome.toUpperCase()) {
+            console.log("Contato encontrado!");
+            console.log(`${nome} - ${email} - ${telefone} - ${idade}`);
+            encontrado = true;
+            break;
+          }
+        }
+        if (!encontrado) {
+          console.log("Contato não encontrado.");
+        }
         break;
       }
       case 3: {
-        //lista todos
+        //listar todos
         for (const [nome, email, telefone, idade] of contatos) {
           console.log(`${nome} - ${email} - ${telefone} - ${idade}`);
         }
